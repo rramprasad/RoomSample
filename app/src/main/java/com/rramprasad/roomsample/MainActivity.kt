@@ -1,17 +1,12 @@
 package com.rramprasad.roomsample
 
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.google.gson.Gson
-import com.rramprasad.roomsample.data.Recipe
-import com.rramprasad.roomsample.data.RecipeDatabase
-import com.rramprasad.roomsample.data.RecipeEntity
-import com.rramprasad.roomsample.data.RecipeResponse
+import com.rramprasad.roomsample.data.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,8 +17,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mLinearLayoutManager: LinearLayoutManager
 
     private lateinit var mRecipesArrayList: ArrayList<RecipeEntity>
-
-
 
     private lateinit var mDBWorkerThread: DBWorkerThread
 
@@ -608,8 +601,20 @@ class MainActivity : AppCompatActivity() {
         val recipesList: List<Recipe> = Gson().fromJson(jsonString, Array<Recipe>::class.java).toList()
 
         for (recipe: Recipe in recipesList) {
-            val recipeEntity = RecipeEntity(recipe.id, recipe.name, recipe.servings, recipe.imageURL)
-            mDatabase?.recipeDao()?.insertRecipe(recipeEntity)
+
+            val recipeEntity = RecipeEntity(recipe.id, recipe.name,recipe.servings, recipe.imageURL)
+
+            val recipeId : Long? = mDatabase?.recipeDao()?.insertRecipe(recipeEntity)
+
+            for (ingredient in recipe.ingredients) {
+                val ingredientEntity = IngredientEntity(null,recipeId,ingredient.quantity, ingredient.measure, ingredient.ingredient)
+                mDatabase?.recipeDao()?.insertIngredient(ingredientEntity)
+            }
+
+            for (step in recipe.steps) {
+                val recipeStepEntity = RecipeStepEntity(null,step.stepId,recipeId,step.shortDescription, step.description, step.videoURL, step.thumbnailURL)
+                mDatabase?.recipeDao()?.insertRecipeStep(recipeStepEntity)
+            }
         }
     }
 }

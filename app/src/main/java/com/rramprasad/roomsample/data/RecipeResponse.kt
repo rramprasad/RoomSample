@@ -17,16 +17,45 @@ data class Recipe(
         @SerializedName("name")
         var name: String,
 
-
-        /*@SerializedName("ingredients")
+        @SerializedName("ingredients")
         var ingredients: List<Ingredient>,
 
         @SerializedName("steps")
-        var steps: List<RecipeStep>,*/
+        var steps: List<RecipeStep>,
 
         @SerializedName("servings")
         var servings: String,
 
         @SerializedName("image")
         var imageURL: String
+)
+
+data class RecipeStep(
+
+        @SerializedName("id")
+        var stepId: Int,
+
+        @SerializedName("shortDescription")
+        var shortDescription: String,
+
+        @SerializedName("description")
+        var description: String,
+
+        @SerializedName("videoURL")
+        var videoURL: String,
+
+        @SerializedName("thumbnailURL")
+        var thumbnailURL: String
+)
+
+data class Ingredient(
+
+        @SerializedName("quantity")
+        var quantity: Double,
+
+        @SerializedName("measure")
+        var measure: String,
+
+        @SerializedName("ingredient")
+        var ingredient: String
 )

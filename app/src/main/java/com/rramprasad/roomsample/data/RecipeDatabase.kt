@@ -5,7 +5,7 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 
-@Database(entities = [(RecipeEntity::class)],version = 1,exportSchema = false)
+@Database(entities = [(RecipeEntity::class),(RecipeStepEntity::class),(IngredientEntity::class)],version = 1,exportSchema = false)
 abstract class RecipeDatabase : RoomDatabase(){
 
 
