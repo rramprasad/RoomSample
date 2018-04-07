@@ -9,9 +9,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.rramprasad.roomsample.data.Recipe
+import com.rramprasad.roomsample.data.RecipeEntity
 import com.squareup.picasso.Picasso
 
-class RecipesAdapter(private val recipesArrayList: ArrayList<Recipe>) : RecyclerView.Adapter<RecipesAdapter.CustomViewHolder>(){
+class RecipesAdapter(private val recipesArrayList: ArrayList<RecipeEntity>) : RecyclerView.Adapter<RecipesAdapter.CustomViewHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder{

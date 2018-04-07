@@ -5,20 +5,20 @@ import android.arch.persistence.room.*
 @Dao
 interface RecipeDao {
 
-    @Query("SELECT * from Recipe")
-    fun getAllRecipes() : List<Recipe>
+    @Query("SELECT * from recipes_entity")
+    fun getAllRecipes() : List<RecipeEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertRecipe(recipe: Recipe)
+    fun insertRecipe(recipe: RecipeEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAllRecipes(recipes: List<Recipe>)
+    fun insertAllRecipes(recipes: List<RecipeEntity>)
 
     @Update
-    fun updateRecipe(recipe: Recipe)
+    fun updateRecipe(recipe: RecipeEntity)
 
     @Delete
-    fun deleteRecipe(recipe: Recipe)
+    fun deleteRecipe(recipe: RecipeEntity)
 
 }
 
